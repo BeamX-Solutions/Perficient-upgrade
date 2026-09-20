@@ -1,0 +1,197 @@
+/* Ink-dark closing band, as in the export. */
+
+.footer {
+  padding-block: 54px 26px;
+  background: var(--fg);
+  color: var(--surface);
+  border-top: 1px solid var(--on-fg-line);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.6fr 0.7fr 1fr;
+  gap: 56px;
+  padding-bottom: 44px;
+}
+
+/* ---- Brand column ---- */
+
+.brandCol {
+  display: grid;
+  justify-items: start;
+  gap: 0;
+}
+
+/* Keeps the blue pin off the dark ground. */
+.logoPlate {
+  display: inline-flex;
+  padding: 10px;
+  border-radius: 7px;
+  background: var(--surface);
+}
+
+.blurb {
+  margin: 22px 0 0;
+  max-width: 44ch;
+  color: var(--on-fg-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.divider {
+  display: block;
+  width: 64px;
+  height: 1px;
+  margin-top: 28px;
+  background: var(--accent);
+}
+
+.socials {
+  display: flex;
+  gap: 14px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  color: color-mix(in oklch, var(--surface) 72%, transparent);
+  transition: color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.social svg {
+  width: 19px;
+  height: 19px;
+}
+
+a.social:hover {
+  color: var(--surface);
+  transform: translateY(-1px);
+}
+
+/* Awaiting a real handle: visible, but not pretending to be a link. */
+.socialIdle {
+  color: color-mix(in oklch, var(--surface) 34%, transparent);
+  cursor: default;
+}
+
+.motto {
+  margin: 24px 0 0;
+  color: var(--surface);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ---- Link + contact columns ---- */
+
+.col {
+  display: block;
+}
+
+/* Brand blue lifted toward white so it holds contrast on the dark ground. */
+.heading {
+  margin: 0 0 20px;
+  color: color-mix(in oklch, var(--accent) 78%, var(--surface));
+  font: 700 11px var(--font-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.links,
+.contactList {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links a {
+  color: color-mix(in oklch, var(--surface) 68%, transparent);
+  font-size: 14px;
+  transition: color var(--dur) var(--ease);
+}
+
+.links a:hover {
+  color: var(--surface);
+}
+
+.contactList {
+  gap: 18px;
+}
+
+.contactList li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 12px;
+  align-items: start;
+  color: color-mix(in oklch, var(--surface) 72%, transparent);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.contactList svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  color: color-mix(in oklch, var(--accent) 78%, var(--surface));
+}
+
+/* Phone numbers stack, one per line. */
+.contactList a {
+  display: block;
+  overflow-wrap: anywhere;
+  transition: color var(--dur) var(--ease);
+}
+
+.contactList a:hover {
+  color: var(--surface);
+}
+
+/* ---- Bottom rule ---- */
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--on-fg-line);
+  color: color-mix(in oklch, var(--surface) 46%, transparent);
+  font-size: 11px;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 44px;
+  }
+
+  .brandCol {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-bottom: 34px;
+  }
+
+  .brandCol {
+    grid-column: auto;
+  }
+
+  .bottom {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

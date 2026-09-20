@@ -1,0 +1,64 @@
+.dockWrap {
+  position: absolute;
+  z-index: 6;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.dock {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr auto;
+  align-items: end;
+  gap: 14px;
+  padding: 20px;
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow: var(--shadow);
+  /* Clipped top-right corner, echoing the pin mark. */
+  border-radius: 18px 0 0 0;
+}
+
+.intro {
+  align-self: center;
+  padding-right: 18px;
+  border-right: 1px solid var(--border);
+}
+
+.intro strong {
+  display: block;
+  font: 600 16px var(--font-body);
+}
+
+.intro span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+@media (max-width: 1080px) {
+  .dock {
+    grid-template-columns: 1fr 1fr 1fr;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .intro {
+    border-right: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .dock {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .intro {
+    grid-column: 1 / -1;
+  }
+
+  .dock :global(.btn) {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}

@@ -1,0 +1,544 @@
+/*
+ * Design system reference.
+ *
+ * This screen runs the export's tighter documentation scale (1180px measure,
+ * 10px radius, smaller headings) rather than the marketing site's, so specimens
+ * sit closer together and read as a catalogue.
+ */
+
+.page {
+  --container: 1180px;
+  --gutter: clamp(20px, 4vw, 40px);
+  --radius: 10px;
+  --fs-h1: clamp(27px, 3.8vw, 48px);
+  --fs-h2: clamp(21px, 2.6vw, 31px);
+  --fs-h3: 17px;
+  --fs-lead: clamp(15px, 1.4vw, 17px);
+}
+
+.page h1 {
+  line-height: 1.06;
+}
+
+.page h2 {
+  line-height: 1.1;
+}
+
+.page h3 {
+  line-height: 1.25;
+}
+
+.page :global(.eyebrow) {
+  margin-bottom: 16px;
+  color: var(--accent-strong);
+  letter-spacing: 0.1em;
+}
+
+.section {
+  padding-block: clamp(44px, 6vw, 74px);
+}
+
+.section + .section {
+  border-top: 1px solid var(--border);
+}
+
+/* ---------------- Nav ---------------- */
+
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklch, var(--bg) 90%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.navInner {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.version {
+  padding-left: 12px;
+  border-left: 1px solid var(--border);
+  color: var(--muted);
+  font: 600 11px var(--font-mono);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.nav a {
+  position: relative;
+  padding-block: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 2px;
+  height: 1px;
+  background: var(--fg);
+  transition: right var(--dur) var(--ease);
+}
+
+.nav a:hover {
+  color: var(--fg);
+}
+
+.nav a:hover::after {
+  right: 0;
+}
+
+/* ---------------- Hero ---------------- */
+
+.hero {
+  padding-block: clamp(54px, 8vw, 110px) clamp(48px, 7vw, 84px);
+}
+
+.heroSplit {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: clamp(44px, 8vw, 104px);
+  align-items: end;
+}
+
+.heroSplit h1 {
+  max-width: 12ch;
+}
+
+.heroLead {
+  margin-top: 24px;
+  max-width: 50ch;
+}
+
+/* The clipped blue rule: the single recurring flourish, echoing the pin. */
+.heroRule {
+  width: 100%;
+  height: 10px;
+  margin-bottom: 24px;
+  background: var(--accent);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+
+.principles {
+  padding: 28px 0 0;
+  border-top: 1px solid var(--fg);
+  display: grid;
+  gap: 20px;
+}
+
+.principle {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 14px;
+  align-items: baseline;
+}
+
+.principle span {
+  color: var(--muted);
+  font: 600 12px var(--font-mono);
+}
+
+.principle strong {
+  font-size: 15px;
+}
+
+/* ---------------- Layout helpers ---------------- */
+
+.sectionHead {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.7fr) minmax(0, 1.3fr);
+  gap: var(--gap-xl);
+  margin-bottom: 48px;
+}
+
+.sectionHead :global(.lead) {
+  max-width: 44ch;
+}
+
+.narrowHead {
+  max-width: 42ch;
+  margin-bottom: 48px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap-lg);
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap-lg);
+}
+
+.grid12 {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+  gap: var(--gap-xl);
+  align-items: start;
+}
+
+/* ---------------- Colour ---------------- */
+
+.swatch {
+  min-height: 178px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.swatch strong {
+  font-size: 14px;
+}
+
+.swatch code {
+  display: block;
+  margin-top: 5px;
+  font: 11px / 1.4 var(--font-mono);
+  opacity: 0.78;
+}
+
+.swatchBg {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.swatchSurface {
+  background: var(--surface);
+  color: var(--fg);
+}
+
+.swatchFg {
+  background: var(--fg);
+  color: var(--surface);
+}
+
+.swatchFg :global(.meta) {
+  color: var(--on-fg-strong);
+}
+
+.swatchMuted {
+  background: var(--muted);
+  color: var(--surface);
+}
+
+.swatchMuted :global(.meta) {
+  color: var(--surface);
+}
+
+.swatchBorder {
+  background: var(--border);
+  color: var(--fg);
+}
+
+.swatchAccent {
+  background: var(--accent);
+  color: var(--fg);
+}
+
+.stateRow {
+  margin-top: 20px;
+}
+
+.stateChip {
+  min-height: 72px;
+  padding: 16px;
+  border-radius: var(--radius);
+  color: var(--surface);
+  display: flex;
+  align-items: flex-end;
+  font: 700 12px var(--font-mono);
+}
+
+.stateSuccess {
+  background: var(--success);
+}
+
+.stateWarning {
+  background: var(--warning);
+  color: var(--fg);
+}
+
+.stateDanger {
+  background: var(--danger);
+}
+
+/* ---------------- Typography specimens ---------------- */
+
+.typeSample {
+  padding-block: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.typeSample:first-child {
+  border-top-color: var(--fg);
+}
+
+.typeMeta {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font: 11px var(--font-mono);
+}
+
+.displaySample {
+  font: 500 clamp(26px, 3.4vw, 42px) / 1.05 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.headingSample {
+  font: 500 clamp(20px, 2.2vw, 27px) / 1.15 var(--font-display);
+  letter-spacing: -0.025em;
+}
+
+.bodySample {
+  max-width: 58ch;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.monoSample {
+  font: 13px / 1.6 var(--font-mono);
+  letter-spacing: 0.04em;
+}
+
+/* ---------------- Spacing scale ---------------- */
+
+.spacingLead {
+  margin-top: 18px;
+}
+
+.spaceRow {
+  display: grid;
+  grid-template-columns: 64px 1fr 76px;
+  align-items: center;
+  gap: 18px;
+  min-height: 48px;
+  border-top: 1px solid var(--border);
+}
+
+.spaceRow:first-child {
+  border-top-color: var(--fg);
+}
+
+.spaceBar {
+  height: 8px;
+  max-width: 100%;
+  background: var(--fg);
+}
+
+/* ---------------- Component cards ---------------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  padding: 26px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg) 0 var(--radius-lg) var(--radius-lg);
+}
+
+.cardTitle {
+  margin-top: -12px;
+}
+
+.buttonSet {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.fieldStack {
+  display: grid;
+  gap: var(--gap-md);
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.help {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ---------------- Patterns ---------------- */
+
+.anatomyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap-md);
+}
+
+.anatomyCopy {
+  margin-top: -8px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.bookingShell {
+  position: relative;
+  margin-top: var(--gap-lg);
+  background: var(--fg);
+  color: var(--surface);
+  border-radius: 26px 0 26px 26px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+/* The accent spine, the one chromatic cue on this surface. */
+.bookingShell::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 7px;
+  background: var(--accent);
+}
+
+.bookingCopy {
+  display: grid;
+  gap: var(--gap-md);
+  padding: clamp(30px, 5vw, 54px);
+  padding-left: clamp(40px, 6vw, 64px);
+}
+
+.bookingCopy :global(.eyebrow) {
+  margin-bottom: 0;
+  color: color-mix(in oklch, var(--accent) 72%, var(--surface));
+}
+
+.bookingLead {
+  color: var(--on-fg-strong);
+}
+
+.bookingCopy :global(.meta) {
+  color: var(--on-fg-muted);
+}
+
+.bookingAction {
+  width: fit-content;
+  margin-top: 8px;
+}
+
+/* ---------------- Guidance ---------------- */
+
+.doDont {
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+}
+
+.doDont:first-child {
+  border-top-color: var(--fg);
+}
+
+.doDont strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.doDont span {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* ---------------- Footer ---------------- */
+
+.pagefoot {
+  padding-block: 42px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.pagefootInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--gap-md);
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 920px) {
+  .grid2,
+  .grid3,
+  .grid12,
+  .heroSplit,
+  .sectionHead,
+  .anatomyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroSplit {
+    align-items: start;
+  }
+
+  .heroSplit h1 {
+    max-width: 14ch;
+  }
+
+  .principles {
+    margin-top: 16px;
+  }
+
+  .nav {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .navInner {
+    min-height: 64px;
+  }
+
+  .version {
+    display: none;
+  }
+
+  .topnav :global(.btn) {
+    display: none;
+  }
+
+  .section {
+    padding-block: 54px;
+  }
+
+  .buttonSet :global(.btn) {
+    width: 100%;
+  }
+
+  .typeMeta {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

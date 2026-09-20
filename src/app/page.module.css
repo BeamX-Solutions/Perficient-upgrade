@@ -1,0 +1,498 @@
+/* Homepage — cinematic hero, service gallery, showroom, proof, close. */
+
+/* ---------------- Hero ---------------- */
+
+.hero {
+  position: relative;
+  min-height: min(820px, 100svh);
+  display: grid;
+  align-items: stretch;
+  overflow: hidden;
+  background: var(--fg);
+  color: var(--surface);
+}
+
+.heroMedia {
+  position: absolute;
+  inset: 0;
+}
+
+.heroMedia img,
+.heroMedia > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% center;
+}
+
+/* Ink wash that keeps the headline legible without flattening the photograph. */
+.heroMedia::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--fg) 94%, transparent) 0%,
+    color-mix(in oklch, var(--fg) 75%, transparent) 44%,
+    color-mix(in oklch, var(--fg) 20%, transparent) 74%,
+    color-mix(in oklch, var(--fg) 56%, transparent) 100%
+  );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  align-content: end;
+  min-height: min(820px, 100svh);
+  /* Clears the fixed nav, which the photograph runs beneath. */
+  padding-top: calc(var(--nav-height) + 40px);
+  /* Room for the booking dock that overlaps the hero's bottom edge. */
+  padding-bottom: 150px;
+}
+
+.heroCopy {
+  max-width: 760px;
+}
+
+.heroCopy h1 {
+  max-width: 11ch;
+  line-height: 1;
+}
+
+.heroCopy :global(.lead) {
+  margin-top: 26px;
+  max-width: 42ch;
+  color: var(--on-fg-strong);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.heroCaption {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 158px;
+  max-width: 220px;
+  padding: 18px 0 0;
+  border-top: 1px solid color-mix(in oklch, var(--surface) 60%, transparent);
+}
+
+.heroCaption strong {
+  display: block;
+  font-size: 14px;
+}
+
+.heroCaption span {
+  display: block;
+  margin-top: 6px;
+  color: color-mix(in oklch, var(--surface) 62%, transparent);
+  font-size: 12px;
+}
+
+/* ---------------- Section head (shared on this page) ---------------- */
+
+.sectionHead {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 56px;
+  align-items: end;
+  margin-bottom: 46px;
+}
+
+.sectionHead :global(.lead) {
+  max-width: 45ch;
+}
+
+/* ---------------- The Perficient standard ---------------- */
+
+.photoIntro {
+  background: var(--surface);
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: clamp(44px, 8vw, 112px);
+  align-items: end;
+}
+
+.introGrid h2 {
+  max-width: 9.5ch;
+}
+
+.introLead {
+  margin-top: 22px;
+  max-width: 46ch;
+}
+
+.introNotes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--fg);
+  margin-top: 38px;
+}
+
+.note {
+  min-height: 100px;
+  padding: 20px 18px 0 0;
+  border-right: 1px solid var(--border);
+}
+
+.note:nth-child(2) {
+  padding-left: 20px;
+}
+
+.note:last-child {
+  padding-left: 20px;
+  border-right: 0;
+}
+
+.note strong {
+  display: block;
+  font-size: 14px;
+}
+
+.note span {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ---------------- The experience ---------------- */
+
+.comfort {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  min-height: 600px;
+  background: var(--surface);
+}
+
+.comfortPhoto {
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.comfortPhoto img,
+.comfortPhoto > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.comfortCopy {
+  display: grid;
+  align-content: center;
+  padding: clamp(40px, 6vw, 84px);
+}
+
+.comfortCopy h2 {
+  max-width: 9ch;
+}
+
+.comfortLead {
+  margin-top: 24px;
+  max-width: 38ch;
+}
+
+.comfortList {
+  display: grid;
+  margin-top: 44px;
+  border-top: 1px solid var(--fg);
+}
+
+.comfortRow {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 16px;
+  padding-block: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.comfortRow span {
+  color: var(--muted);
+  font: 650 11px var(--font-mono);
+}
+
+.comfortRow strong {
+  font-size: 14px;
+}
+
+/* ---------------- Testimonials ---------------- */
+
+.testimonials {
+  background: var(--surface);
+}
+
+.testimonialGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--fg);
+}
+
+.testimonial {
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+  padding: 30px 30px 26px 0;
+  border-right: 1px solid var(--border);
+}
+
+.testimonial + .testimonial {
+  padding-left: 34px;
+}
+
+.testimonial:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.rating {
+  display: flex;
+  gap: 5px;
+  color: var(--fg);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.testimonial blockquote {
+  margin: 38px 0 34px;
+  color: var(--fg);
+  font: 400 clamp(17px, 1.6vw, 20px) / 1.55 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Portrait slot sits beside the name and holds its width whether or not a
+   photograph has been supplied, so the row never reflows. */
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+
+.author strong {
+  display: block;
+  font-size: 14px;
+}
+
+.author span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font: 650 11px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------------- Process ---------------- */
+
+.process {
+  background: var(--bg);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.step {
+  padding-top: 26px;
+  border-top: 1px solid var(--fg);
+}
+
+.stepNum {
+  display: block;
+  margin-bottom: 46px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.step p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---------------- Closing ---------------- */
+
+.closing {
+  position: relative;
+  min-height: 560px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--fg);
+  color: var(--surface);
+  text-align: center;
+}
+
+.closingMedia {
+  position: absolute;
+  inset: 0;
+}
+
+.closingMedia img,
+.closingMedia > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.52;
+}
+
+.closing::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklch, var(--fg) 62%, transparent);
+}
+
+.closingCopy {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 64px var(--gutter);
+}
+
+.closingCopy h2 {
+  font-size: clamp(29px, 4.3vw, 55px);
+}
+
+.closingLead {
+  margin: 20px auto 30px;
+  color: var(--on-fg-strong);
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 1080px) {
+  .heroContent {
+    padding-bottom: 260px;
+  }
+
+  .heroCaption {
+    bottom: 272px;
+  }
+}
+
+@media (max-width: 820px) {
+  .introGrid,
+  .sectionHead,
+  .comfort {
+    grid-template-columns: 1fr;
+  }
+
+  .introGrid,
+  .sectionHead {
+    gap: 28px;
+  }
+
+  .comfortPhoto {
+    min-height: 460px;
+  }
+
+  .comfortCopy {
+    min-height: 480px;
+  }
+
+  .testimonialGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial,
+  .testimonial + .testimonial,
+  .testimonial:last-child {
+    min-height: auto;
+    padding: 30px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .testimonial blockquote {
+    margin-block: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: 940px;
+  }
+
+  .heroMedia img,
+  .heroMedia > * {
+    object-position: 63% center;
+  }
+
+  .heroMedia::after {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--fg) 45%, transparent),
+      color-mix(in oklch, var(--fg) 86%, transparent) 48%,
+      var(--fg) 100%
+    );
+  }
+
+  .heroContent {
+    min-height: 940px;
+    align-content: start;
+    padding-top: calc(var(--nav-height) + 40px);
+    padding-bottom: 440px;
+  }
+
+  .heroCopy {
+    margin-top: auto;
+  }
+
+  .heroCopy h1 {
+    max-width: 7.5ch;
+  }
+
+  .heroActions :global(.btn) {
+    width: 100%;
+  }
+
+  .heroCaption {
+    display: none;
+  }
+
+  .introNotes {
+    grid-template-columns: 1fr;
+  }
+
+  .note,
+  .note:nth-child(2),
+  .note:last-child {
+    min-height: auto;
+    padding: 20px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comfortPhoto {
+    min-height: 420px;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .stepNum {
+    margin-bottom: 34px;
+  }
+
+  .closing {
+    min-height: 560px;
+  }
+
+  .closingCopy {
+    padding-block: 64px;
+  }
+}

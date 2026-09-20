@@ -1,0 +1,163 @@
+.card {
+  position: relative;
+  min-height: 520px;
+  display: grid;
+  grid-template-columns: 1.28fr 0.72fr;
+  overflow: hidden;
+  background: var(--fg);
+  color: var(--surface);
+  border-radius: 28px 0 28px 28px;
+}
+
+.visual {
+  position: relative;
+  min-height: 520px;
+  display: grid;
+  background: color-mix(in oklch, var(--fg) 90%, var(--surface));
+}
+
+.visual img,
+.visual > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border-left: 1px solid color-mix(in oklch, var(--surface) 15%, transparent);
+}
+
+.detail :global(.meta) {
+  color: var(--on-fg-faint);
+}
+
+.name {
+  margin-top: 8px;
+  /* Showroom headline, so it takes the display serif rather than the h3 sans. */
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(24px, 2.9vw, 36px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.price {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid color-mix(in oklch, var(--surface) 20%, transparent);
+}
+
+.price span {
+  color: color-mix(in oklch, var(--surface) 52%, transparent);
+  font-size: 12px;
+}
+
+.price strong {
+  display: block;
+  font: 750 25px var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 29px;
+  padding: 5px 10px;
+  border: 1px solid color-mix(in oklch, var(--surface) 24%, transparent);
+  border-radius: 999px;
+  color: color-mix(in oklch, var(--surface) 68%, transparent);
+  font-size: 11px;
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: auto;
+  padding-top: 34px;
+}
+
+.tab {
+  min-height: 48px;
+  border: 1px solid color-mix(in oklch, var(--surface) 18%, transparent);
+  border-right: 0;
+  background: transparent;
+  color: var(--on-fg-faint);
+  font: 650 11px var(--font-mono);
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.tab:last-child {
+  border-right: 1px solid color-mix(in oklch, var(--surface) 18%, transparent);
+}
+
+.tab:hover {
+  color: var(--surface);
+  background: color-mix(in oklch, var(--surface) 8%, transparent);
+}
+
+.tab.isActive {
+  color: var(--fg);
+  background: var(--surface);
+}
+
+.book {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.allLink {
+  align-self: center;
+  margin-top: 18px;
+  color: var(--surface);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.allLink:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+}
+
+@media (max-width: 1080px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .visual {
+    min-height: 400px;
+  }
+
+  .detail {
+    border-left: 0;
+    border-top: 1px solid color-mix(in oklch, var(--surface) 15%, transparent);
+  }
+}
+
+@media (max-width: 640px) {
+  .card {
+    min-height: 0;
+  }
+
+  .visual {
+    min-height: 350px;
+  }
+
+  .detail {
+    padding: 28px 22px;
+  }
+
+  .nav {
+    padding-top: 30px;
+  }
+}

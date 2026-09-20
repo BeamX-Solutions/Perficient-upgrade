@@ -1,0 +1,25 @@
+.wrap {
+  display: grid;
+  align-content: center;
+  min-height: 62svh;
+  /* Clears the fixed nav. */
+  padding-top: calc(var(--nav-height) + var(--section-pad));
+}
+
+.lead {
+  margin-top: 24px;
+  max-width: 46ch;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+@media (max-width: 560px) {
+  .actions :global(.btn) {
+    width: 100%;
+  }
+}

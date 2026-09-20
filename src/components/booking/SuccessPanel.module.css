@@ -1,0 +1,62 @@
+.success {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+/* The pin is already a circular badge, so it needs no plate behind it. */
+.mark {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.copy {
+  margin: 10px auto 0;
+  max-width: 42ch;
+  color: var(--muted);
+}
+
+.summary {
+  display: grid;
+  gap: 0;
+  margin: 28px auto 0;
+  max-width: 42ch;
+  text-align: left;
+  border-top: 1px solid var(--border);
+}
+
+.summary > div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding-block: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.summary dt {
+  color: var(--muted);
+  font: 650 11px var(--font-mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.summary dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.success .btn,
+.success button {
+  margin-top: 26px;
+}
+
+@media (max-width: 480px) {
+  .summary > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}

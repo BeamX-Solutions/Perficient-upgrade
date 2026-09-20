@@ -1,0 +1,487 @@
+/*
+ * Perficient Logistics — frozen design tokens + shared primitives.
+ *
+ * Extracted from the OpenDesign export before any component work, so framework
+ * defaults can never substitute their own colours or typography. Values come
+ * from the exported screens; where the three homepage concepts disagreed by a
+ * sub-pixel amount (h3 line-height, section padding) the value shared by the
+ * majority of screens wins and the outlier overrides it in its own module.
+ */
+
+:root {
+  /* ---- Core palette (brand-spec.md + export) ---- */
+  --bg: oklch(97.8% 0.006 247);
+  --surface: oklch(100% 0 0);
+  --fg: oklch(18% 0.012 255);
+  --muted: oklch(52% 0.018 255);
+  --border: oklch(90.5% 0.015 247);
+  --accent: oklch(65.8% 0.178 253);
+
+  /* ---- Derived ---- */
+  --accent-soft: color-mix(in oklch, var(--accent) 11%, var(--surface));
+  --accent-strong: color-mix(in oklch, var(--accent) 82%, var(--fg));
+  --fg-soft: color-mix(in oklch, var(--fg) 5%, transparent);
+
+  /* ---- State ---- */
+  --success: oklch(55% 0.14 153);
+  --warning: oklch(72% 0.14 78);
+  --danger: oklch(56% 0.18 26);
+
+  /* ---- Ink-on-dark helpers (used by every inverted section) ---- */
+  --on-fg-strong: color-mix(in oklch, var(--surface) 76%, transparent);
+  --on-fg-muted: color-mix(in oklch, var(--surface) 62%, transparent);
+  --on-fg-faint: color-mix(in oklch, var(--surface) 48%, transparent);
+  --on-fg-line: color-mix(in oklch, var(--surface) 16%, transparent);
+
+  /*
+   * Brand typefaces, matching perficientlogisticsltd.com:
+   *   display — Playfair Display 500, a high-contrast serif, for h1/h2
+   *   body    — Inter, for body copy and h3-h6
+   *   mono    — the system mono stack, for rates and operational figures
+   */
+  --font-display: var(--font-display-face), "Playfair Display", Georgia, serif;
+  --font-body: var(--font-body-face), Inter, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  /*
+   * Type scale.
+   *
+   * This is the global dial: every heading on every screen derives from these
+   * four values, so tuning the overall "zoom" of the site happens here rather
+   * than component by component. The two page-level overrides (fleet, design
+   * system) scale proportionally against these.
+   *
+   * Sized for Playfair Display, which is a normal-width serif and so runs
+   * noticeably wider than the condensed face this scale previously assumed.
+   */
+  --fs-h1: clamp(34px, 5vw, 70px);
+  --fs-h2: clamp(25px, 3.2vw, 42px);
+  --fs-h3: 19px;
+  --fs-lead: clamp(16px, 1.5vw, 18px);
+  --fs-body: 15px;
+  --fs-meta: 11px;
+
+  /* ---- Spacing (8-point rhythm) ---- */
+  --gap-xs: 8px;
+  --gap-sm: 12px;
+  --gap-md: 20px;
+  --gap-lg: 32px;
+  --gap-xl: 56px;
+  --gap-2xl: 96px;
+
+  /* ---- Layout ---- */
+  --container: 1240px;
+  --gutter: clamp(20px, 4vw, 44px);
+  --section-pad: clamp(54px, 7vw, 96px);
+  --nav-height: 70px;
+
+  /* ---- Shape + elevation ---- */
+  --radius: 9px;
+  --radius-lg: 18px;
+  --radius-cut: 18px 0 18px 18px;
+  --shadow: 0 26px 80px color-mix(in oklch, var(--fg) 26%, transparent);
+  --shadow-card: 0 18px 44px color-mix(in oklch, var(--fg) 10%, transparent);
+
+  /* ---- Motion ---- */
+  --dur-fast: 0.12s;
+  --dur: 0.18s;
+  --dur-slow: 0.45s;
+  --ease: ease;
+}
+
+/* ---------- Reset ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* The fixed nav, plus room for the fleet catalogue's sticky filter bar. */
+  scroll-padding-top: calc(var(--nav-height) + 84px);
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/*
+ * Heading families follow the live brand: the serif carries h1/h2 only, and
+ * everything below them is Inter. A display serif at subhead sizes reads
+ * fussy, which is why the brand splits it this way.
+ */
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1,
+h2,
+.h1,
+.h2,
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+h3,
+h4,
+.h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+:focus-visible {
+  outline: 3px solid color-mix(in oklch, var(--accent) 48%, transparent);
+  outline-offset: 3px;
+}
+
+/* ---------- Shared primitives ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-pad);
+}
+
+/* Serif needs looser tracking and room for descenders than the condensed
+   grotesque this scale was first cut for. */
+h1,
+.h1 {
+  font-size: var(--fs-h1);
+  line-height: 1.02;
+}
+
+h2,
+.h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.06;
+}
+
+h3,
+.h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+}
+
+.lead {
+  max-width: 58ch;
+  color: var(--muted);
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: var(--accent);
+  font: 700 var(--fs-meta) / 1.2 var(--font-mono);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.meta {
+  color: var(--muted);
+  font: 650 var(--fs-meta) / 1.4 var(--font-mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Prices and operational figures always read in tabular mono numerals. */
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Hidden until tabbed to, then a real button in the top-left corner. */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--gutter);
+  z-index: 100;
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  background: var(--fg);
+  color: var(--surface);
+  font-weight: 700;
+  transition: top var(--dur) var(--ease);
+}
+
+.skip-link:focus-visible {
+  top: 12px;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  font-size: 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-weight: 750;
+  line-height: 1;
+  transition:
+    transform var(--dur-fast) var(--ease),
+    background var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.48;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: var(--accent-strong);
+  color: var(--surface);
+  border-color: var(--accent-strong);
+  box-shadow: 0 10px 22px color-mix(in oklch, var(--accent) 20%, transparent);
+}
+
+.btn-primary:hover {
+  background: color-mix(in oklch, var(--accent-strong) 82%, var(--fg));
+  border-color: color-mix(in oklch, var(--accent-strong) 82%, var(--fg));
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--fg);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--bg);
+  border-color: var(--fg);
+}
+
+.btn-ink {
+  background: var(--fg);
+  color: var(--surface);
+  border-color: var(--fg);
+}
+
+.btn-ink:hover {
+  background: color-mix(in oklch, var(--fg) 86%, var(--surface));
+  border-color: color-mix(in oklch, var(--fg) 86%, var(--surface));
+}
+
+.btn-light {
+  background: var(--surface);
+  color: var(--fg);
+  border-color: var(--surface);
+}
+
+.btn-light:hover {
+  background: color-mix(in oklch, var(--surface) 88%, var(--border));
+  border-color: color-mix(in oklch, var(--surface) 88%, var(--border));
+}
+
+.btn-outline-light {
+  background: transparent;
+  color: var(--surface);
+  border-color: color-mix(in oklch, var(--surface) 48%, transparent);
+}
+
+.btn-outline-light:hover {
+  background: color-mix(in oklch, var(--surface) 12%, transparent);
+  border-color: var(--surface);
+}
+
+.btn-ghost {
+  padding-inline: 8px;
+  background: transparent;
+  color: var(--fg);
+  border-color: transparent;
+}
+
+.btn-ghost:hover {
+  background: var(--fg-soft);
+}
+
+/* The single recurring flourish: an arrow that steps forward on hover. */
+.btn-arrow::after {
+  content: "→";
+  transition: transform var(--dur) var(--ease);
+}
+
+.btn-arrow:hover::after {
+  transform: translateX(3px);
+}
+
+/* ---------- Form fields ---------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 11px;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--fg);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: color-mix(in oklch, var(--muted) 68%, transparent);
+}
+
+.input:hover,
+.textarea:hover {
+  border-color: color-mix(in oklch, var(--muted) 62%, var(--border));
+}
+
+.input:focus,
+.textarea:focus {
+  outline: 3px solid color-mix(in oklch, var(--accent) 22%, transparent);
+  border-color: var(--accent-strong);
+}
+
+.input[aria-invalid="true"],
+.textarea[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+.form-note {
+  margin: 11px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.field-error {
+  color: var(--danger);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* The native backdrop blocks interaction but not scrolling — lock the page. */
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

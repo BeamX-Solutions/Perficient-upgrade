@@ -1,0 +1,182 @@
+/*
+ * Fixed navigation.
+ *
+ * Fixed rather than sticky on purpose: every hero sets `overflow: hidden` to
+ * crop its photograph, and `body` carries `overflow-x: hidden`. Both create
+ * containing blocks that clip a sticky element, so it would stop following the
+ * page. Fixed positioning is unaffected by either.
+ *
+ * Because it is out of flow, each hero starts at the top of the document and
+ * its photograph runs underneath the bar. Hero copy carries its own top
+ * padding to clear it.
+ */
+
+.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  color: var(--fg);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+  /* Transparent until scrolled. */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+}
+
+/* Sitting on photography, before the page moves. */
+.inverted {
+  color: var(--surface);
+  border-bottom-color: color-mix(in oklch, var(--surface) 22%, transparent);
+}
+
+/* Scrolled past the hero — the bar takes the canvas with it. */
+.solid {
+  background: color-mix(in oklch, var(--bg) 92%, transparent);
+  backdrop-filter: blur(16px);
+  border-bottom-color: var(--border);
+  color: var(--fg);
+}
+
+.navInner {
+  min-height: var(--nav-height);
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  align-items: center;
+  gap: 24px;
+}
+
+/* The lockup keeps a white plate so the blue pin never sits on photography. */
+.brand {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7px 9px;
+  border-radius: 7px;
+  background: var(--surface);
+}
+
+.desktopNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+}
+
+.desktopNav a {
+  position: relative;
+  padding-block: 9px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.inverted .desktopNav a {
+  color: color-mix(in oklch, var(--surface) 76%, transparent);
+}
+
+/* Underline wipes in from the left on hover — the recurring thin-rule motif. */
+.desktopNav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 3px;
+  height: 1px;
+  background: var(--fg);
+  transition: right var(--dur) var(--ease);
+}
+
+.inverted .desktopNav a::after {
+  background: var(--surface);
+}
+
+.desktopNav a:hover,
+.desktopNav a.isActive {
+  color: var(--fg);
+}
+
+.inverted .desktopNav a:hover,
+.inverted .desktopNav a.isActive {
+  color: var(--surface);
+}
+
+.desktopNav a:hover::after,
+.desktopNav a.isActive::after {
+  right: 0;
+}
+
+.navAction {
+  justify-self: end;
+}
+
+.menuButton {
+  display: none;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--fg);
+}
+
+.inverted .menuButton {
+  border-color: color-mix(in oklch, var(--surface) 42%, transparent);
+  background: color-mix(in oklch, var(--fg) 58%, transparent);
+  color: var(--surface);
+}
+
+.menuButton svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---- Mobile sheet ---- */
+
+.mobileNav {
+  display: none;
+  padding: 8px var(--gutter) 18px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  /* The sheet can outrun a short viewport once every link is listed. */
+  max-height: calc(100svh - var(--nav-height));
+  overflow-y: auto;
+}
+
+.mobileNav.isOpen {
+  display: grid;
+}
+
+.mobileNav a,
+.mobileAction {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--fg);
+  font-weight: 700;
+  text-align: left;
+}
+
+.mobileAction {
+  color: var(--accent-strong);
+}
+
+@media (max-width: 1120px) {
+  .navInner {
+    grid-template-columns: 1fr auto;
+  }
+
+  .desktopNav,
+  .navAction > :global(.btn) {
+    display: none;
+  }
+
+  .menuButton {
+    display: grid;
+  }
+}

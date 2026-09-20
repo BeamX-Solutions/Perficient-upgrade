@@ -1,0 +1,150 @@
+/* Booking dialog — the clipped top-right corner marks it as an action surface. */
+
+.dialog {
+  width: min(760px, calc(100% - 32px));
+  max-height: calc(100svh - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 22px 0 22px 22px;
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow: var(--shadow);
+}
+
+.dialog::backdrop {
+  background: color-mix(in oklch, var(--fg) 74%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 30px 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.head p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.iconButton {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--fg);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.iconButton:hover {
+  background: var(--bg);
+  border-color: var(--fg);
+}
+
+.iconButton svg {
+  width: 19px;
+  height: 19px;
+}
+
+.body {
+  padding: 26px 30px 30px;
+}
+
+/* ---- Fields ---- */
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+/* ---- Estimate ---- */
+
+.priceSummary {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px 24px;
+  align-items: end;
+  padding: 18px;
+  border: 1px solid var(--border);
+  /* The accent rule is the one place blue appears in the form. */
+  border-top: 3px solid var(--accent-strong);
+  border-radius: 0 0 12px 12px;
+  background: var(--bg);
+}
+
+.priceSummary span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.priceSummary > div > p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.priceSummary strong {
+  display: block;
+  margin-top: 4px;
+  font: 750 clamp(20px, 3vw, 26px) / 1.1 var(--font-mono);
+  text-align: right;
+}
+
+.priceFootnote {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.success {
+  min-height: 420px;
+  padding: 48px;
+}
+
+@media (max-width: 640px) {
+  .head,
+  .body {
+    padding-inline: 20px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+
+  .priceSummary {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .priceSummary strong {
+    text-align: left;
+  }
+
+  .success {
+    min-height: 360px;
+    padding: 32px 20px;
+  }
+}

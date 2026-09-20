@@ -1,0 +1,102 @@
+/* Interactive specimens for the design system page. */
+
+.segmented {
+  display: inline-grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.segment {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.segment:hover {
+  color: var(--fg);
+  background: var(--fg-soft);
+}
+
+.segment.isActive {
+  color: var(--fg);
+  background: var(--surface);
+  box-shadow: 0 1px 4px color-mix(in oklch, var(--fg) 12%, transparent);
+}
+
+/* ---- Service cards ---- */
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap-lg);
+}
+
+.serviceCard {
+  width: 100%;
+  min-height: 212px;
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg) 0 var(--radius-lg) var(--radius-lg);
+  background: var(--surface);
+  color: var(--fg);
+  text-align: left;
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+
+.serviceCard:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklch, var(--fg) 44%, var(--border));
+  box-shadow: 0 14px 34px color-mix(in oklch, var(--fg) 8%, transparent);
+}
+
+.serviceCard.isSelected {
+  border-color: var(--accent-strong);
+  box-shadow: inset 0 0 0 1px var(--accent-strong);
+}
+
+.serviceMark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 28px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.serviceMark svg {
+  width: 20px;
+  height: 20px;
+}
+
+.serviceCard p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 920px) {
+  .serviceGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .segmented {
+    width: 100%;
+  }
+
+  .segment {
+    padding-inline: 8px;
+    font-size: 13px;
+  }
+}

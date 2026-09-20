@@ -1,0 +1,188 @@
+/* Contact us. */
+
+/* ---------------- Hero ---------------- */
+
+.hero {
+  position: relative;
+  min-height: 540px;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  background: var(--fg);
+  color: var(--surface);
+}
+
+.heroMedia {
+  position: absolute;
+  inset: 0;
+}
+
+.heroMedia img,
+.heroMedia > * {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.62;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--fg) 94%, transparent),
+    color-mix(in oklch, var(--fg) 62%, transparent) 58%,
+    color-mix(in oklch, var(--fg) 30%, transparent)
+  );
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  align-content: end;
+  /* Clears the fixed nav, which the photograph runs beneath. */
+  padding-block: calc(var(--nav-height) + clamp(40px, 6vw, 76px)) 60px;
+}
+
+.heroCopy h1 {
+  max-width: 7ch;
+}
+
+.heroLead {
+  margin-top: 26px;
+  color: var(--on-fg-strong);
+}
+
+/* ---------------- Booking layout ---------------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: 0.76fr 1.24fr;
+  gap: clamp(50px, 9vw, 120px);
+  align-items: start;
+}
+
+.panel {
+  /* The contact routes stay in view while the form is filled in. */
+  position: sticky;
+  top: calc(var(--nav-height) + 32px);
+}
+
+.panelHeading {
+  max-width: 8ch;
+}
+
+.panelLead {
+  margin-top: 24px;
+}
+
+.contactList {
+  margin-top: 42px;
+  border-top: 1px solid var(--fg);
+}
+
+.contactRow {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 18px;
+  padding-block: 19px;
+  border-bottom: 1px solid var(--border);
+}
+
+.contactRow > span:first-child {
+  color: var(--muted);
+  font: 650 11px var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.contactRow a,
+.contactRow strong {
+  display: block;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.contactRow a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------------- Availability ---------------- */
+
+.availability {
+  background: var(--fg);
+  color: var(--surface);
+}
+
+.availabilityGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 9vw, 120px);
+  align-items: end;
+}
+
+.availabilityHeading {
+  max-width: 9ch;
+}
+
+.availabilityLead {
+  color: color-mix(in oklch, var(--surface) 70%, transparent);
+}
+
+.availabilityNotes {
+  margin-top: 34px;
+  border-top: 1px solid color-mix(in oklch, var(--surface) 32%, transparent);
+}
+
+.availabilityRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 18px;
+  border-bottom: 1px solid var(--on-fg-line);
+}
+
+.availabilityRow span {
+  color: color-mix(in oklch, var(--surface) 58%, transparent);
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 900px) {
+  .grid,
+  .availabilityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 560px;
+  }
+
+  .hero::after {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--fg) 38%, transparent),
+      var(--fg)
+    );
+  }
+
+  .contactRow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .availabilityRow {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

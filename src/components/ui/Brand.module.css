@@ -1,0 +1,42 @@
+/* Typographic fallback lockup, used until the supplied logo file is present. */
+
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  /* Everything scales from the container width so nav and footer sizes both work. */
+  font-size: calc(var(--lockup-width, 160px) / 13);
+  color: var(--fg);
+}
+
+.mark {
+  width: 2.35em;
+  height: 2.35em;
+  flex: 0 0 auto;
+}
+
+.words {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18em;
+  min-width: 0;
+}
+
+.name {
+  font-family: var(--font-body);
+  font-size: 1.5em;
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.suffix {
+  font-family: var(--font-body);
+  font-size: 0.62em;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
